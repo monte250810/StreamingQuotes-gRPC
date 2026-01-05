@@ -90,7 +90,6 @@ try
     app.UseRouting();
 
     app.MapGrpcService<CryptoStreamingGrpcService>();
-    app.MapGrpcService<HealthGrpcService>();
 
     if (app.Environment.IsDevelopment())
     {
