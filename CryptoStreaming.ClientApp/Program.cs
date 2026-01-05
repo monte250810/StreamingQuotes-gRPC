@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using System.Text.Json;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Protos.Crypto;
 
@@ -8,7 +9,6 @@ using var channel = GrpcChannel.ForAddress("https://localhost:5001", new GrpcCha
 {
     HttpHandler = new HttpClientHandler
     {
-        // For development only - bypass SSL certificate validation
         ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
     }
 });
@@ -35,17 +35,24 @@ await foreach (var asset in symbolsStream.ResponseStream.ReadAllAsync())
 {
     PrintAsset(asset);
 }
+
 // 3. Stream live prices
 Console.WriteLine("\n================================");
 Console.WriteLine("📈 Starting live price stream (Ctrl+C to stop)...\n");
+
+// Load symbols from JSON file
+var coinsJson = await File.ReadAllTextAsync("coins.json");
+var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+var coinsData = JsonSerializer.Deserialize<CoinsConfig>(coinsJson, jsonOptions);
+var symbols = coinsData?.Symbols ?? [];
+
 var streamRequest = new StreamPricesRequest { IntervalMs = 15000 };
-streamRequest.SymbolIds.Add("bitcoin");
-streamRequest.SymbolIds.Add("ethereum");
-streamRequest.SymbolIds.Add("solana");
-streamRequest.SymbolIds.Add("cardano");
-streamRequest.SymbolIds.Add("ripple");
-streamRequest.SymbolIds.Add("polkadot");
-streamRequest.SymbolIds.Add("avalanche-2");
+foreach (var symbol in symbols)
+{
+    streamRequest.SymbolIds.Add(symbol);
+}
+
+Console.WriteLine($"📡 Streaming cryptocurrencies...\n");
 
 using var cts = new CancellationTokenSource();
 Console.CancelKeyPress += (_, e) =>
@@ -81,3 +88,5 @@ static void PrintAsset(CryptoAssetResponse asset)
     var arrow = asset.PriceChange24H >= 0 ? "▲" : "▼";
     Console.WriteLine($"  {asset.MarketCapRank,3}. {asset.Symbol,-6} {asset.Name,-20} ${asset.CurrentPrice,12:N2} ({arrow}{asset.PriceChange24H:0.00}%) [{asset.Trend}]");
 }
+
+record CoinsConfig(List<string> Symbols);

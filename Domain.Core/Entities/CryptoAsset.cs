@@ -52,12 +52,12 @@ public sealed class CryptoAsset : AggregateRoot<SymbolId>
         string id,
         string ticker,
         string name,
-        decimal currentPrice,
-        decimal marketCap,
-        decimal volume24H,
-        decimal priceChange24H,
-        decimal high24H,
-        decimal low24H,
+        decimal? currentPrice,
+        decimal? marketCap,
+        decimal? volume24H,
+        decimal? priceChange24H,
+        decimal? high24H,
+        decimal? low24H,
         int? marketCapRank = null,
         CryptoCategory category = CryptoCategory.Unknown,
         string? imageUrl = null)
@@ -88,7 +88,7 @@ public sealed class CryptoAsset : AggregateRoot<SymbolId>
         if (newPrice < 0)
             throw new InvalidPriceException(newPrice);
 
-        var oldPrice = CurrentPrice.Amount;
+        var oldPrice = CurrentPrice.Amount ?? 0;
         CurrentPrice = Money.Create(newPrice);
         Range24H = PriceRange.Create(high24H, low24H);
         PriceChange24H = Percentage.Create(priceChange24H);
@@ -96,7 +96,7 @@ public sealed class CryptoAsset : AggregateRoot<SymbolId>
 
         IncrementVersion();
 
-        if (Math.Abs(newPrice - oldPrice) / oldPrice > 0.05m) // 5% change
+        if (oldPrice > 0 && Math.Abs(newPrice - oldPrice) / oldPrice > 0.05m) // 5% change
         {
             RaiseDomainEvent(new SignificantPriceChangeEvent(Id.Value, oldPrice, newPrice));
         }
@@ -129,7 +129,7 @@ public sealed class CryptoAsset : AggregateRoot<SymbolId>
     {
         return MarketCapRankValue switch
         {
-            null => Enums.MarketCapRank.Unknown,
+            null => MarketCapRank.Unknown,
             <= 10 => Enums.MarketCapRank.Top10,
             <= 50 => Enums.MarketCapRank.Top50,
             <= 100 => Enums.MarketCapRank.Top100,

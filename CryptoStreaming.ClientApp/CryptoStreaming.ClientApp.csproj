@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Protos\Protos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="coins.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

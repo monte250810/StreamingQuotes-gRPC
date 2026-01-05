@@ -3,5 +3,5 @@
     public sealed record CryptoAssetCreatedEvent(
         string SymbolId,
         string Ticker,
-        decimal InitialPrice) : DomainEvent;
+        decimal? InitialPrice) : DomainEvent;
 }

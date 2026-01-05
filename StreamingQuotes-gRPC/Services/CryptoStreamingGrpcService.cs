@@ -83,6 +83,10 @@ namespace StreamingQuotes_gRPC.Services
             {
                 await foreach (var update in _sender.CreateStream(query, context.CancellationToken))
                 {
+                    // Skip updates with no price data
+                    if (!update.Price.HasValue)
+                        continue;
+
                     await responseStream.WriteAsync(MapToPriceResponse(update), context.CancellationToken);
                     _logger.LogDebug("Streamed: {Ticker} = ${Price:N2}", update.Ticker, update.Price);
                 }
@@ -125,6 +129,10 @@ namespace StreamingQuotes_gRPC.Services
                     await foreach (var update in _sender.CreateStream(query, cts.Token))
                     {
                         if (!subscribedSymbols.Contains(update.SymbolId))
+                            continue;
+
+                        // Skip updates with no price data
+                        if (!update.Price.HasValue)
                             continue;
 
                         await responseStream.WriteAsync(MapToPriceResponse(update), context.CancellationToken);
@@ -181,12 +189,12 @@ namespace StreamingQuotes_gRPC.Services
             Id = dto.Id,
             Symbol = dto.Symbol,
             Name = dto.Name,
-            CurrentPrice = (double)dto.CurrentPrice,
-            MarketCap = (double)dto.MarketCap,
-            Volume24H = (double)dto.Volume24H,
-            PriceChange24H = (double)dto.PriceChange24H,
-            High24H = (double)dto.High24H,
-            Low24H = (double)dto.Low24H,
+            CurrentPrice = (double)(dto.CurrentPrice ?? 0),
+            MarketCap = (double)(dto.MarketCap ?? 0),
+            Volume24H = (double)(dto.Volume24H ?? 0),
+            PriceChange24H = (double)(dto.PriceChange24H ?? 0),
+            High24H = (double)(dto.High24H ?? 0),
+            Low24H = (double)(dto.Low24H ?? 0),
             MarketCapRank = dto.MarketCapRank,
             ImageUrl = dto.ImageUrl ?? string.Empty,
             Trend = dto.Trend,
@@ -197,10 +205,10 @@ namespace StreamingQuotes_gRPC.Services
         {
             SymbolId = dto.SymbolId,
             Ticker = dto.Ticker,
-            Price = (double)dto.Price,
-            PriceChange24H = (double)dto.PriceChange24H,
-            High24H = (double)dto.High24H,
-            Low24H = (double)dto.Low24H,
+            Price = (double)(dto.Price ?? 0),
+            PriceChange24H = (double)(dto.PriceChange24H ?? 0),
+            High24H = (double)(dto.High24H ?? 0),
+            Low24H = (double)(dto.Low24H ?? 0),
             Timestamp = Timestamp.FromDateTime(DateTime.SpecifyKind(dto.Timestamp, DateTimeKind.Utc))
         };
     }

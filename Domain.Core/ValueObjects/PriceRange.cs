@@ -9,7 +9,7 @@ public sealed record PriceRange
         High = high;
         Low = low;
     }
-    public static PriceRange Create(decimal high, decimal low, string currency = "USD")
+    public static PriceRange Create(decimal? high, decimal? low, string currency = "USD")
     {
         if (high < low)
             throw new ArgumentException("High price cannot be less than low price");
@@ -17,8 +17,8 @@ public sealed record PriceRange
         return new PriceRange(Money.Create(high, currency), Money.Create(low, currency));
     }
 
-    public decimal Spread => High.Amount - Low.Amount;
-    public decimal SpreadPercentage => Low.Amount > 0 ? (Spread / Low.Amount) * 100 : 0;
+    public decimal? Spread => High.Amount - Low.Amount;
+    public decimal? SpreadPercentage => Low.Amount > 0 ? (Spread / Low.Amount) * 100 : 0;
 
     public override string ToString() => $"H: {High} / L: {Low}";
 }

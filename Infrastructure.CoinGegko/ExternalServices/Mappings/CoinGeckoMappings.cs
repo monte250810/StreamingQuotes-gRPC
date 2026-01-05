@@ -12,18 +12,19 @@ namespace Infrastructure.CoinGegko.ExternalServices.Mappings
                 id: data.Id,
                 ticker: data.Symbol,
                 name: data.Name,
-                currentPrice: data.CurrentPrice,
-                marketCap: data.MarketCap,
-                volume24H: data.TotalVolume,
-                priceChange24H: data.PriceChangePercentage24H,
-                high24H: data.High24H,
-                low24H: data.Low24H,
+                currentPrice: data.CurrentPrice ?? 0,
+                marketCap: data.MarketCap ?? 0,
+                volume24H: data.TotalVolume ?? 0,
+                priceChange24H: data.PriceChangePercentage24H ?? 0,
+                high24H: data.High24H ?? 0,
+                low24H: data.Low24H ?? 0,
                 marketCapRank: data.MarketCapRank,
                 category: CryptoCategory.Unknown,
                 imageUrl: data.Image);
         }
 
         public static IEnumerable<CryptoAsset> ToDomainEntities(this IEnumerable<CoinGeckoMarketData> data)
-            => data.Select(ToDomainEntity);
+            => data.Where(d => d.CurrentPrice.HasValue) // Filter out coins with no price data
+                   .Select(ToDomainEntity);
     }
 }

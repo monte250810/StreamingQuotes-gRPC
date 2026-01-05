@@ -17,10 +17,10 @@ namespace Infrastructure.CoinGegko.Models
         public string? Image { get; init; }
 
         [JsonPropertyName("current_price")]
-        public decimal CurrentPrice { get; init; }
+        public decimal? CurrentPrice { get; init; }
 
         [JsonPropertyName("market_cap")]
-        public decimal MarketCap { get; init; }
+        public decimal? MarketCap { get; init; }
 
         [JsonPropertyName("market_cap_rank")]
         public int? MarketCapRank { get; init; }
@@ -29,28 +29,28 @@ namespace Infrastructure.CoinGegko.Models
         public decimal? FullyDilutedValuation { get; init; }
 
         [JsonPropertyName("total_volume")]
-        public decimal TotalVolume { get; init; }
+        public decimal? TotalVolume { get; init; }
 
         [JsonPropertyName("high_24h")]
-        public decimal High24H { get; init; }
+        public decimal? High24H { get; init; }
 
         [JsonPropertyName("low_24h")]
-        public decimal Low24H { get; init; }
+        public decimal? Low24H { get; init; }
 
         [JsonPropertyName("price_change_24h")]
-        public decimal PriceChange24H { get; init; }
+        public decimal? PriceChange24H { get; init; }
 
         [JsonPropertyName("price_change_percentage_24h")]
-        public decimal PriceChangePercentage24H { get; init; }
+        public decimal? PriceChangePercentage24H { get; init; }
 
         [JsonPropertyName("market_cap_change_24h")]
-        public decimal MarketCapChange24H { get; init; }
+        public decimal? MarketCapChange24H { get; init; }
 
         [JsonPropertyName("market_cap_change_percentage_24h")]
-        public decimal MarketCapChangePercentage24H { get; init; }
+        public decimal? MarketCapChangePercentage24H { get; init; }
 
         [JsonPropertyName("circulating_supply")]
-        public decimal CirculatingSupply { get; init; }
+        public decimal? CirculatingSupply { get; init; }
 
         [JsonPropertyName("total_supply")]
         public decimal? TotalSupply { get; init; }
@@ -59,24 +59,24 @@ namespace Infrastructure.CoinGegko.Models
         public decimal? MaxSupply { get; init; }
 
         [JsonPropertyName("ath")]
-        public decimal AllTimeHigh { get; init; }
+        public decimal? AllTimeHigh { get; init; }
 
         [JsonPropertyName("ath_change_percentage")]
-        public decimal AllTimeHighChangePercentage { get; init; }
+        public decimal? AllTimeHighChangePercentage { get; init; }
 
         [JsonPropertyName("ath_date")]
-        public DateTime AllTimeHighDate { get; init; }
+        public DateTime? AllTimeHighDate { get; init; }
 
         [JsonPropertyName("atl")]
-        public decimal AllTimeLow { get; init; }
+        public decimal? AllTimeLow { get; init; }
 
         [JsonPropertyName("atl_change_percentage")]
-        public decimal AllTimeLowChangePercentage { get; init; }
+        public decimal? AllTimeLowChangePercentage { get; init; }
 
         [JsonPropertyName("atl_date")]
-        public DateTime AllTimeLowDate { get; init; }
+        public DateTime? AllTimeLowDate { get; init; }
 
         [JsonPropertyName("last_updated")]
-        public DateTime LastUpdated { get; init; }
+        public DateTime? LastUpdated { get; init; }
     }
 }

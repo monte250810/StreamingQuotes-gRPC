@@ -2,16 +2,16 @@
 
 public sealed record Money
 {
-    public decimal Amount { get; }
+    public decimal? Amount { get; }
     public string Currency { get; }
 
-    private Money(decimal amount, string currency)
+    private Money(decimal? amount, string currency)
     {
         Amount = amount;
         Currency = currency.ToUpperInvariant();
     }
 
-    public static Money Create(decimal amount, string currency = "USD")
+    public static Money Create(decimal? amount, string currency = "USD")
     {
         if (amount < 0)
             throw new ArgumentException("Amount cannot be negative", nameof(amount));
