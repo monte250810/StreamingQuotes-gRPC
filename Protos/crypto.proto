@@ -1,0 +1,76 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Protos.Crypto";
+
+package crypto;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service CryptoStreamingService {
+  rpc GetSymbols(GetSymbolsRequest) returns (stream CryptoAssetResponse);
+  rpc GetSymbolById(GetSymbolByIdRequest) returns (CryptoAssetResponse);
+  rpc StreamPrices(StreamPricesRequest) returns (stream PriceUpdateResponse);
+  rpc SubscribePrices(stream SubscribeRequest) returns (stream PriceUpdateResponse);
+}
+
+message GetSymbolsRequest {
+  google.protobuf.Int32Value limit = 1;
+  string order_by = 2;
+  bool descending = 3;
+}
+
+// Request to get a single symbol by ID
+message GetSymbolByIdRequest {
+  string symbol_id = 1;
+}
+
+// Request to stream prices for specific symbols
+message StreamPricesRequest {
+  repeated string symbol_ids = 1;
+  int32 interval_ms = 2;
+}
+
+// Subscription request for bidirectional streaming
+message SubscribeRequest {
+  oneof action {
+    SubscribeAction subscribe = 1;
+    UnsubscribeAction unsubscribe = 2;
+  }
+}
+
+message SubscribeAction {
+  repeated string symbol_ids = 1;
+}
+
+message UnsubscribeAction {
+  repeated string symbol_ids = 1;
+}
+
+// Full crypto asset response
+message CryptoAssetResponse {
+  string id = 1;
+  string symbol = 2;
+  string name = 3;
+  double current_price = 4;
+  double market_cap = 5;
+  double volume_24h = 6;
+  double price_change_24h = 7;
+  double high_24h = 8;
+  double low_24h = 9;
+  google.protobuf.Int32Value market_cap_rank = 10;
+  string image_url = 11;
+  string trend = 12;
+  google.protobuf.Timestamp last_updated = 13;
+}
+
+// Price update response for streaming
+message PriceUpdateResponse {
+  string symbol_id = 1;
+  string ticker = 2;
+  double price = 3;
+  double price_change_24h = 4;
+  double high_24h = 5;
+  double low_24h = 6;
+  google.protobuf.Timestamp timestamp = 7;
+}

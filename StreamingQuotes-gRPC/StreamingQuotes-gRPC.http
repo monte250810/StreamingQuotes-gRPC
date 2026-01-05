@@ -1,0 +1,6 @@
+@StreamingQuotes_gRPC_HostAddress = http://localhost:5193
+
+GET {{StreamingQuotes_gRPC_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

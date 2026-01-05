@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Protos.Health";
+
+package health;
+
+// Health check service
+service HealthService {
+  // Check health status
+  rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
+  
+  // Watch health status changes (streaming)
+  rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse);
+}
+
+message HealthCheckRequest {
+  string service = 1;
+}
+
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+    SERVICE_UNKNOWN = 3;
+  }
+  ServingStatus status = 1;
+  string message = 2;
+  string version = 3;
+  int64 uptime_seconds = 4;
+}
