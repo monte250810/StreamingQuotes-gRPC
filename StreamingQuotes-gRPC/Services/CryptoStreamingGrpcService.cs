@@ -83,7 +83,6 @@ namespace StreamingQuotes_gRPC.Services
             {
                 await foreach (var update in _sender.CreateStream(query, context.CancellationToken))
                 {
-                    // Skip updates with no price data
                     if (!update.Price.HasValue)
                         continue;
 
@@ -106,11 +105,7 @@ namespace StreamingQuotes_gRPC.Services
             using var cts = CancellationTokenSource.CreateLinkedTokenSource(context.CancellationToken);
 
             _logger.LogInformation("SubscribePrices bidirectional stream started");
-
-            // Background task to handle subscription changes
             var subscriptionTask = ProcessSubscriptionsAsync(requestStream, subscribedSymbols, cts.Token);
-
-            // Allow initial subscriptions to come in
             await Task.Delay(500, context.CancellationToken);
 
             try
@@ -131,7 +126,6 @@ namespace StreamingQuotes_gRPC.Services
                         if (!subscribedSymbols.Contains(update.SymbolId))
                             continue;
 
-                        // Skip updates with no price data
                         if (!update.Price.HasValue)
                             continue;
 
@@ -180,7 +174,6 @@ namespace StreamingQuotes_gRPC.Services
             }
             catch (OperationCanceledException)
             {
-                // Expected when stream ends
             }
         }
 
