@@ -27,7 +27,7 @@ The application its streaming crypto symbols by coingecko -> (https://www.coinge
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Architecture](#-architecture)
 - [Quick Start](#-quick-start)
@@ -42,29 +42,6 @@ The application its streaming crypto symbols by coingecko -> (https://www.coinge
 
 ## 🏛️ Architecture
 
-### Layer Structure
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                   Presentation Layer                     │
-│  StreamingQuotes-gRPC, ClientApp, gRPC Interceptors    │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────┐
-│                   Application Layer                      │
-│    CQRS Queries/Commands, DTOs, Pipeline Behaviors      │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────┐
-│                     Domain Layer                         │
-│   Entities, Value Objects, Domain Events, Aggregates    │
-└────────────────────┬────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────┐
-│                 Infrastructure Layer                     │
-│     CoinGecko API, Caching, External Services           │
-└─────────────────────────────────────────────────────────┘
-```
 
 ### Design Patterns
 
@@ -94,7 +71,7 @@ The application its streaming crypto symbols by coingecko -> (https://www.coinge
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -133,7 +110,7 @@ dotnet run
 ```
 
 The server will start on:
-- 🔒 gRPC endpoint: `https://localhost:5001` (HTTP/2)
+ gRPC endpoint: `https://localhost:5001` (HTTP/2)
 - 🌐 Web endpoint: `https://localhost:5002` (HTTP/1.1 & HTTP/2)
 
 **5. Run the client (in a new terminal)**
@@ -668,17 +645,6 @@ Tested on: Intel i7-12700K, 32GB RAM, .NET 8.0
 - Adjust `CircuitBreakerThreshold` based on upstream reliability
 
 ---
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these guidelines:
-
-1. **Fork the repository**
-2. **Create a feature branch** (`git checkout -b feature/AmazingFeature`)
-3. **Commit your changes** (`git commit -m 'Add some AmazingFeature'`)
-4. **Push to the branch** (`git push origin feature/AmazingFeature`)
-5. **Open a Pull Request**
-
 ### Development Setup
 
 ```bash
@@ -704,18 +670,3 @@ dotnet format --verify-no-changes
 - Use conventional commits for commit messages
 
 ---
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-
-##  Support
-
-- 📧 Email: [andreas@andreas-papageorgiou.com](mailto:andreas@andreas-papageorgiou.com)
-
----
-
-<p align="center">Made with ❤️ by <a href="https://github.com/andispapageo">andispapageo</a></p>
